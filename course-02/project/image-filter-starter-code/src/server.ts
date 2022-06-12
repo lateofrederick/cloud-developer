@@ -32,13 +32,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     const { image_url } = req.query
 
     if (!image_url) {
-      return res.status(442).send({message: "Please pass an image url"});
+      return res.status(442).send("Please pass an image url");
     }
     await filterImageFromURL(image_url)
       .then(result => {
         return res.status(200).sendFile(result, () => deleteLocalFiles([result]));
       }).catch(error => {
-        return res.status(400).send({message: error});
+        return res.status(400).send("something went wrong");
       });
 
   })
